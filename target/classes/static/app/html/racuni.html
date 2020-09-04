@@ -1,0 +1,104 @@
+<div ng-controller="RacuniCtrl">
+
+<form>
+
+	<div class="form-group">
+	<label>Ime Prezime</label>
+	<input class="form-control" ng-model="racun.imePrezime">
+	</div>
+	<div class="form-group">
+	<label>JMBG</label>
+	<input class="form-control" ng-model="racun.jmbg">
+	</div>
+	<div class="form-group">
+	<label>Banke</label>
+	<select class="form-control" ng-model="racun.idBanka" ng-change="getTipoviRacuna()">
+	<option ng-repeat="b in banke" value="{{b.id}}">{{b.naziv}}</option>
+	</select>
+	</div >
+	
+	<div class="form-group">
+	<label>Broj racuna</label>
+	<input class="form-control" ng-model="racun.brojRacuna">
+	</div>
+	
+	<div class="form-group" ng-show="racun.idBanka!=''">
+	<label>Tip Racuna</label>
+	<select class="form-control" ng-model="racun.idTipRacuna">
+	<option ng-repeat="t in tipoviRacuna" value="{{t.id}}">{{t.naziv}}</option>
+	</select>
+	</div>
+
+	<button class="btn btn-success" ng-click="dodaj()">Dodaj</button>
+
+
+
+</form>
+
+	
+	
+		<form>
+		<div class="form-group">
+		<label>JMBG</label>
+		<input class="form-control" ng-model="pretraga.jmbg">
+		</div>
+		<div class="form-group">
+		<label>Banke</label>
+		<select class="form-control" ng-model="pretraga.idBanka" >
+		<option ng-repeat="b in banke" value="{{b.id}}">{{b.naziv}}</option>
+		</select>
+		</div >
+		
+	
+		<button class="btn btn-secondary" ng-click="pretrazi()">Pretrazi</button>
+		
+		</form>
+
+
+
+<button class="btn btn-warning" ng-click="promeniStranicu(-1)" ng-disabled="pageNum==0">Previous</button>
+<button class="btn btn-warning" ng-click="promeniStranicu(+1)" ng-disabled="pageNum==totalPages-1">Next</button>
+<table class="table">
+<thead>
+<tr>
+<th>Ime Prezime</th><th>JMBG</th><th>Stanje Racuna</th><th>Broj Racuna</th><th>Tip Racuna</th><th>Banka</th><th>Akcije</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="r in racuni">
+<td>{{r.imePrezime}}</td><td>{{r.jmbg}}</td><td>{{r.stanjeRacuna}}</td><td>{{r.brojRacuna}}</td><td>{{r.nazivTipRacuna}}</td><td>{{r.nazivBanka}}</td>
+<td><button class="btn btn-primary" ng-click="goToEdit(r.id)">Edit</button></td>
+<td><button class="btn btn-danger" ng-click="obrisi(r.id)">Delete</button></td>
+</tr>
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+<button class="btn btn-danger" ng-click="goToPrenos()">Nalog za prenos</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
